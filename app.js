@@ -945,7 +945,9 @@ function renderReport(){
 function applyZoom(){
   var pv=document.getElementById('pv'); if(!pv) return;
   var pages=pv.querySelectorAll('.pv-page'), z=state.ui.zoom, val;
-  if(z==='fit'){ var avail=pv.clientWidth-48-(pages.length-1)*24; val=Math.min(1,Math.max(0.3,avail/(794*pages.length))); }
+  /* [Nexergy 수정] 폰에서는 쪽이 세로로 쌓이므로(style.css 폰 규칙) 한 쪽 폭 기준으로 맞춤 */
+  var row=pv.querySelector('.pv-pages-row'), stacked=row&&getComputedStyle(row).flexDirection==='column';
+  if(z==='fit'){ var pad=stacked?24:48, avail=pv.clientWidth-pad-(stacked?0:(pages.length-1)*24); val=Math.min(1,Math.max(0.3,avail/(794*(stacked?1:pages.length)))); }
   else val=Number(z);
   pages.forEach(function(p){p.style.zoom=val;});
 }

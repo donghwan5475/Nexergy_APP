@@ -553,3 +553,86 @@ body.hs-flash .app select{animation:hsPulse .7s ease-out}
 .cm-file{font-family:inherit;font-size:13px}
 .cm-code{background:#16202A;color:#E8ECEF;border-radius:8px;padding:12px 14px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:18px;white-space:pre;overflow:auto}
 .cm-foot{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+
+/* =====================================================================
+   [Nexergy 수정] 폰 화면 (≤600px) — 업체 납품본은 1440px 기준이라 폰에서 글자가 겹치던 곳을 정리
+   ===================================================================== */
+@media (max-width:600px){
+  /* 떠 있는 프로토타입 이동 바: 폰에서는 내용을 가리므로 숨김 (각 화면 아래 이전/다음 버튼이 같은 역할) */
+  .protobar{display:none!important}
+  .toast{bottom:20px;max-width:calc(100% - 32px);text-align:center}
+
+  /* 페이지 머리: 제목 아래 설명, 버튼은 줄바꿈 */
+  .page{padding:18px 14px 28px}
+  .page-head h1{font-size:22px;line-height:30px}
+  .actions{flex-wrap:wrap}
+  .chips{gap:5px}
+
+  /* 패널 머리: 제목 — 오른쪽 버튼 — (다음 줄) 설명 */
+  .panel-head{flex-wrap:wrap;gap:6px 12px;padding:14px 16px 0}
+  .panel-head h2{order:0;font-size:15px}
+  .panel-head .right{order:1;margin-left:auto}
+  .panel-head .sub{order:2;flex-basis:100%;min-width:0}
+  .panel-body{padding:12px 16px 16px}
+  .panel-body.tight{padding:6px 6px 12px}
+
+  /* 숫자 표: 폰 폭에 안 들어가면 옆으로 밀어 보고, 첫 열(이름)은 고정 */
+  .dt-wrap,.et-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .dt-wrap::before,.et-wrap::before,.chart-wrap::before,#cmp-chart::before{content:'← 옆으로 밀면 더 보여요';display:block;margin:0 0 6px 6px;font-size:12px;color:var(--ink-3)}
+  .dt.res{min-width:620px}
+  .dt.res th:first-child,.dt.res td:first-child{position:sticky;left:0;z-index:1;background:var(--surface);box-shadow:inset -1px 0 0 var(--line-2)}
+  .et{min-width:720px}
+
+  /* 열유입 구성 표: 경로 이름 아래에 설명을 내려 쓰기 */
+  .dt.comp th:first-child{width:46%}
+  .dt.comp td{white-space:normal;padding:9px 8px}
+  .dt.comp .lg{flex-wrap:wrap;gap:6px 8px}
+  .dt.comp .lg em{flex-basis:100%;margin-left:20px;font-size:12px;line-height:16px}
+
+  /* KPI */
+  .kpi{padding:14px 16px 16px}
+  .kpi .v{font-size:30px;line-height:38px}
+  .kpis,.kpis.three{grid-template-columns:minmax(0,1fr)}
+
+  /* 계산 과정: 열저항망 그림은 옆으로 밀어 보기, 계산 가정은 2열 */
+  .chart-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .calc-body{padding:16px 14px 18px}
+  .calc-foot{grid-template-columns:minmax(0,1fr);gap:18px}
+  .assume dl{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}
+
+  /* 단열 비교 */
+  .cb-row{grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"name val red" "track track track";gap:6px 10px}
+  .cb-name{grid-area:name}
+  .cb-val{grid-area:val}
+  .cb-red{grid-area:red;min-width:64px}
+  .cb-track{grid-area:track;height:14px}
+  .cb{gap:16px}
+  #cmp-chart{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  #cmp-chart svg{min-width:600px}
+  .legend{gap:6px 14px;font-size:12px}
+  .sliders{grid-template-columns:minmax(0,1fr)}
+  .sc{padding:16px 16px 4px}
+
+  /* 회수기간: 누적 그래프도 옆으로 밀어 보기 */
+  .pb-charts .panel-body{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .pb-charts .panel-body>svg.chart{min-width:520px}
+  .slider-row{grid-template-columns:minmax(0,1fr)}
+  .dt.sens td{padding:12px 8px}
+  .formula div{flex-direction:column;gap:2px}
+  .formula .fk{width:auto}
+
+  /* 리포트 미리보기: 두 쪽을 세로로, 폭에 맞춤 */
+  .report-grid{gap:12px}
+  .pv{padding:12px 12px 20px}
+  .pv-pages-row{flex-direction:column;align-items:center;gap:16px}
+
+  /* 입력 화면 */
+  .fgrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px 12px}
+  .ctl .u{min-width:44px;padding:0 8px}
+  .fgrid>div:empty{display:none}                /* 데스크톱 줄맞춤용 빈 칸은 폰에서 숨김 */
+  [data-field="ins.vac"]{grid-column:span 2}   /* 진공도(가수 × 10^지수 Pa)는 한 줄 다 써야 안 잘림 */
+  .rail{padding:16px}
+  .rk .v{font-size:26px;line-height:34px}
+  .flow-nav{flex-wrap:wrap;gap:10px}
+  .flow-nav .step{order:3;width:100%;text-align:center}
+}
