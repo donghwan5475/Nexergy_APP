@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Nexergy LH2 배관 열유입 분석</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <div id="topbar"></div>
+  <div class="view" id="view-input"></div>
+  <div class="view" id="view-result" hidden></div>
+  <div class="view" id="view-compare" hidden></div>
+  <div class="view" id="view-payback" hidden></div>
+  <div class="view" id="view-report" hidden></div>
+</div>
+<div class="protobar" id="protobar" role="navigation" aria-label="프로토타입 화면 이동"></div>
+<div id="print-root"></div>
+<div class="toast" id="toast" role="status" hidden></div>
+<div class="cm-back" id="calc-modal" hidden></div>
+<script src="libs/html2canvas.min.js" defer></script>
+<script src="libs/jspdf.umd.min.js" defer></script>
+<!-- 계산 파일 연결: nexergy-calc.js (nexergy_engine.py를 JS로 옮긴 열저항망 계산) -->
+<script src="nexergy-calc.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
